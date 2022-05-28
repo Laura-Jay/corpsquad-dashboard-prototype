@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import useFetch from "../../api/useFetch";
 import { IEmployee } from "../../interfaces";
-import Employee from './Components/Employee'
+import Employee from "./Components/Employee";
 
 export default function EmployeePage(): JSX.Element {
   const { data, loading, error } = useFetch(
@@ -10,18 +10,18 @@ export default function EmployeePage(): JSX.Element {
 
   if (loading) return <h1>loading...</h1>;
   if (error) console.log(error);
-  let allEmployeeData = []
-    if (data) {
-      allEmployeeData = data.map((employee: IEmployee) => (
-        <Employee
+  let allEmployeeData = [];
+  if (data) {
+    allEmployeeData = data.map((employee: IEmployee) => (
+      <Employee
         key={employee.id}
         id={employee.id}
         name={employee.name}
         role={employee.role}
         avatar={employee.avatar}
-        />
-      ))
-    }
+      />
+    ));
+  }
 
   return (
     <>
