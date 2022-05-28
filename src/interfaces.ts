@@ -17,7 +17,7 @@ export interface IProject {
   contract: {
     startDate: string;
     endDate: string;
-    size: number;
+    size: string;
   };
 }
 
@@ -27,11 +27,13 @@ export interface IProjectProps {
   employeeIds: string[];
   startDate: string;
   endDate: string;
-  size: number;
+  size: string;
 }
 
 export interface APIResponse {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   data: any;
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   error: any;
   loading: boolean;
 }
