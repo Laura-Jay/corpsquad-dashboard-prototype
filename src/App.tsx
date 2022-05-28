@@ -1,7 +1,18 @@
-import { greet } from "./utils/greet";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/Home";
+import ClientPage from "./pages/Client";
+import EmployeePage from "./pages/Employee";
 
 function App(): JSX.Element {
-  return <h1>{greet("World")}</h1>;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/employees/:employeeId" element={<EmployeePage />} />
+        <Route path="/clients/:clientId" element={<ClientPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
