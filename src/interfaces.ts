@@ -17,7 +17,7 @@ export interface IProject {
   contract: {
     startDate: string;
     endDate: string;
-    size: number;
+    size: string;
   };
 }
 
@@ -27,7 +27,7 @@ export interface IProjectProps {
   employeeIds: string[];
   startDate: string;
   endDate: string;
-  size: number;
+  size: string;
 }
 
 export interface APIResponse {
