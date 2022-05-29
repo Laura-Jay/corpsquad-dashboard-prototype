@@ -19,6 +19,7 @@ export interface IProject {
     endDate: string;
     size: string;
   };
+  teamData?: IEmployee[]
 }
 
 export interface IProjectProps {
@@ -36,4 +37,13 @@ export interface APIResponse {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   error: any;
   loading: boolean;
+}
+
+
+
+export interface TeamAPIResponse {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  teamData: any;
+  
+ 
 }
