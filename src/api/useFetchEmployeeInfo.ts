@@ -4,6 +4,8 @@ import { TeamAPIResponse, IEmployee} from "../interfaces";
 
 export default function useFetchEmployeeInfo(employeeIds: string[]):TeamAPIResponse  {
   const [teamData, setTeamData] = useState<IEmployee[] >([])
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState< string | null>(null);
   
   useEffect(() => {
 
@@ -27,11 +29,22 @@ export default function useFetchEmployeeInfo(employeeIds: string[]):TeamAPIRespo
     })
     return Promise.all(requests)
   }
-
-  getTeamInfo(employeeIds)
+  async function run(){
+  try{
+  await getTeamInfo(employeeIds)
     .then(a => setTeamData(a))
+  } catch (error) { 
+    console.log(error)
+    setError("unable to fetch team info")
+  }
+  finally {
+    setLoading(false)
+  }
+}
+
+run()
     
   }, [employeeIds])
   
-  return { teamData }
+  return { teamData , loading, error }
 }

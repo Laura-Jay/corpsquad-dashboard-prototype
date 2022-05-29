@@ -44,6 +44,8 @@ export interface APIResponse {
 export interface TeamAPIResponse {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   teamData: any;
-  
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  error: any;
+  loading: boolean;
  
 }

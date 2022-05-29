@@ -9,8 +9,10 @@ export default function HomePage(): JSX.Element {
     "https://consulting-projects.academy-faculty.repl.co/api/projects"
   );
 
+
   if (loading) return <h1>loading...</h1>;
   if (error) console.log(error);
+
   let projectDataArray = [];
   let allProjectData: IProject[] = [];
 
