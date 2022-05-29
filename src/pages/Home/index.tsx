@@ -9,7 +9,6 @@ export default function HomePage(): JSX.Element {
     "https://consulting-projects.academy-faculty.repl.co/api/projects"
   );
 
-
   if (loading) return <h1>loading...</h1>;
   if (error) console.log(error);
 
@@ -34,10 +33,11 @@ export default function HomePage(): JSX.Element {
   const aggregateRevenue = getAggregate(projectDataArray);
 
   return (
-    <>
-      <h1>Home Page</h1>
-      <h3>Aggregate Consultancy Project Revenue: £{aggregateRevenue}</h3>
-      {allProjectData}
-    </>
+    <section className="responsive-wrapper">
+      <h1>CorpSquad Project Dashboard</h1>
+      <h3>Aggregate Consultancy Project Revenue</h3>
+      <h1 className="cost-h1">£{aggregateRevenue}</h1>
+      <div className="project-grid">{allProjectData}</div>
+    </section>
   );
 }

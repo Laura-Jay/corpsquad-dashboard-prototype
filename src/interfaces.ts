@@ -19,7 +19,7 @@ export interface IProject {
     endDate: string;
     size: string;
   };
-  teamData?: IEmployee[]
+  teamData?: IEmployee[];
 }
 
 export interface IProjectProps {
@@ -39,13 +39,30 @@ export interface APIResponse {
   loading: boolean;
 }
 
-
-
 export interface TeamAPIResponse {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   teamData: any;
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   error: any;
   loading: boolean;
- 
+}
+
+export interface FetchEmployeeResponse {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  employeeData: any;
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  projectData: any;
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  error: any;
+  loading: boolean;
+}
+
+export interface FetchClientResponse {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  clientData: any;
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  projectData: any;
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  error: any;
+  loading: boolean;
 }

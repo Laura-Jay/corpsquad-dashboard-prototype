@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IProject } from "../interfaces";
@@ -7,7 +6,6 @@ import useFetch from "./useFetch";
 
 // export default function useFetchProjects(projects:IProject[]): IProject[] {
 //   const [projectData, setProjectData] = useState<IProject[]>([])
-
 
 //   useEffect(() => {
 //     async function stitchProjectData() {

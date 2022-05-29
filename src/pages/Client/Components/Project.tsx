@@ -43,7 +43,6 @@ export default function Project(props: IProjectProps): JSX.Element {
       <p><strong>ID:</strong> {props.id}</p>
       </div>
       <div className="project-body">
-      <p><strong>Client ID:</strong> {props.clientId}</p>
       <p><strong>Start Date:</strong> {props.startDate}</p>
       <p><strong>End Date:</strong> {props.endDate}</p>
       <p><strong>Project Size:</strong> {props.size}</p>

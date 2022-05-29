@@ -6,7 +6,7 @@ export default function Project(props: IEmployee): JSX.Element {
       <p>Id: {props.id}</p>
       <p>Name: {props.name}</p>
       <p>Role: {props.role}</p>
-      <img src={props.avatar} alt="employee avatar" />
+      <img className="avatar" src={props.avatar} alt="employee avatar" />
     </section>
   );
 }
