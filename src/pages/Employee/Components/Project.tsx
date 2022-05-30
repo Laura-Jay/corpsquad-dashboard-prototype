@@ -1,7 +1,6 @@
 import { IProjectProps, IEmployee } from "../../../interfaces";
 import useFetchEmployeeInfo from "../../../api/useFetchEmployeeInfo";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 export default function Project(props: IProjectProps): JSX.Element {
   const [toggleDetails, setToggleDetails] = useState(false);
@@ -14,6 +13,7 @@ export default function Project(props: IProjectProps): JSX.Element {
   let teamMembers;
 
   if (teamData) {
+    console.log(teamData);
     teamMembers = teamData.map((employee: IEmployee) => {
       return (
         <div className="team-details" key={employee.id}>
@@ -26,8 +26,8 @@ export default function Project(props: IProjectProps): JSX.Element {
           </div>
           <p>
             <strong>Name: </strong>
+            {employee.name}
           </p>
-          <Link to={`/employees/${employee.id}`}>{employee.name}</Link>
           <p>
             <strong>ID: </strong> {employee.id}
           </p>
@@ -57,10 +57,6 @@ export default function Project(props: IProjectProps): JSX.Element {
         </p>
       </div>
       <div className="project-body">
-        <p>
-          <strong>Client ID:</strong>
-        </p>
-        <Link to={`/clients/${props.clientId}`}>{props.clientId}</Link>
         <p>
           <strong>Start Date:</strong> {props.startDate}
         </p>

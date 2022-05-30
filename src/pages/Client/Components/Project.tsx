@@ -1,7 +1,6 @@
 import { IProjectProps, IEmployee } from "../../../interfaces";
 import useFetchEmployeeInfo from "../../../api/useFetchEmployeeInfo";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 export default function Project(props: IProjectProps): JSX.Element {
   const [toggleDetails, setToggleDetails] = useState(false);
@@ -14,6 +13,7 @@ export default function Project(props: IProjectProps): JSX.Element {
   let teamMembers;
 
   if (teamData) {
+    console.log(teamData);
     teamMembers = teamData.map((employee: IEmployee) => {
       return (
         <div className="team-details" key={employee.id}>
@@ -26,8 +26,8 @@ export default function Project(props: IProjectProps): JSX.Element {
           </div>
           <p>
             <strong>Name: </strong>
+            {employee.name}
           </p>
-          <Link to={`/employees/${employee.id}`}>{employee.name}</Link>
           <p>
             <strong>ID: </strong> {employee.id}
           </p>
@@ -58,10 +58,6 @@ export default function Project(props: IProjectProps): JSX.Element {
       </div>
       <div className="project-body">
         <p>
-          <strong>Client ID:</strong>
-        </p>
-        <Link to={`/clients/${props.clientId}`}>{props.clientId}</Link>
-        <p>
           <strong>Start Date:</strong> {props.startDate}
         </p>
         <p>
@@ -72,10 +68,18 @@ export default function Project(props: IProjectProps): JSX.Element {
         </p>
       </div>
       <div className="project-footer">
-        {toggleDetails ? (
-          <button onClick={handleShowDetails}>Hide Team Member Details</button>
+        {props.employeeIds.length > 0 ? (
+          toggleDetails ? (
+            <button onClick={handleShowDetails}>
+              Hide Team Member Details
+            </button>
+          ) : (
+            <button onClick={handleShowDetails}>
+              Show Team Member Details
+            </button>
+          )
         ) : (
-          <button onClick={handleShowDetails}>Show Team Member Details</button>
+          <h3>No Team Details Available</h3>
         )}
         <div className="team-details-grid">
           {toggleDetails && (teamData ? teamMembers : props.employeeIds)}
