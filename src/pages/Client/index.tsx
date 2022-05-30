@@ -3,16 +3,18 @@ import useFetchClient from "../../api/useFetchClient";
 import { IProject } from "../../interfaces";
 import Client from "./Components/Client";
 import findProjectsFromClient from "../../utils/findProjectsFromClient";
-import Project from "./Components/Project"
+import Project from "./Components/Project";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function EmployeePage(): JSX.Element {
-  const id = "e729699c1e86e4a760a51f5b";
+  const { clientId } = useParams() as { clientId: string };
 
   let currentClient;
   let clientProjects;
   let clientProjectsData;
 
-  const { clientData, projectData, error, loading } = useFetchClient(id);
+  const { clientData, projectData, error, loading } = useFetchClient(clientId);
 
   if (loading) return <h1>loading...</h1>;
   if (error) console.log(error);
@@ -23,8 +25,8 @@ export default function EmployeePage(): JSX.Element {
     );
   }
 
-  if (projectData) {
-    clientProjectsData = findProjectsFromClient(id, projectData);
+  if (projectData && clientId) {
+    clientProjectsData = findProjectsFromClient(clientId, projectData);
     clientProjects = clientProjectsData.map((project: IProject) => (
       <Project
         key={project.id}
@@ -39,12 +41,19 @@ export default function EmployeePage(): JSX.Element {
   }
 
   return (
-    <section className="responsive-wrapper">
-    <h1>Client Bio</h1>
-    <div className="client-bio">
-    {currentClient}
-    </div>
-    <div className="project-grid">{clientProjects}</div>
-    </section>
+    <>
+      <nav>
+        <button>
+          <Link to="/" className="link-button">
+            Dashboard Home
+          </Link>
+        </button>
+      </nav>
+      <section className="responsive-wrapper">
+        <h1>Client Bio</h1>
+        <div className="client-bio">{currentClient}</div>
+        <div className="project-grid">{clientProjects}</div>
+      </section>
+    </>
   );
 }

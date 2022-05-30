@@ -21,7 +21,7 @@ export default function useFetchEmployee(id: string): FetchEmployeeResponse {
         role: employeeInfo.data.role,
         avatar: employeeInfo.data.avatar,
       };
-      setEmployeeData(data);
+      setEmployeeData(employeeInfo.data);
     };
 
     const getProjectInfo = async (url: string) => {

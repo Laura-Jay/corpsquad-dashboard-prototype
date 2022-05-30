@@ -41,7 +41,7 @@ export default function useFetch(
     };
 
     getData();
-  }, [[url1, url2, id]]);
+  }, [url1, url2, id]);
 
   return { data, loading, error };
 }

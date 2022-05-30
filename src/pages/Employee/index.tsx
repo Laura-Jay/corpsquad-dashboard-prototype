@@ -1,37 +1,47 @@
-import useFetchEmployee from "../../api/useFetchEmployee";
-import { IEmployee, IProject } from "../../interfaces";
+import useFetchTwice from "../../api/useFetchTwice";
+import { IProject } from "../../interfaces";
 import Employee from "./Components/Employee";
 import findProjectsFromEmployee from "../../utils/findProjectsFromEmployee";
 import Project from "./Components/Project";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function EmployeePage(): JSX.Element {
-  const id = "5cdbf84f55cdc05e91607dcc"; // testing only
+  const { employeeId } = useParams() as { employeeId: string };
+
   let currentEmployeeData;
   let employeeProjects;
   let employeeProjectsData;
 
-  const { employeeData, projectData, loading, error } = useFetchEmployee(
-    `https://consulting-projects.academy-faculty.repl.co/api/employees/${id}`
+  const { data, isLoading, isError } = useFetchTwice(
+    `https://consulting-projects.academy-faculty.repl.co/api/employees/${employeeId}`,
+    `https://consulting-projects.academy-faculty.repl.co/api/projects`,
+    []
   );
 
-  if (loading) return <h1>loading...</h1>;
-  if (error) console.log(error);
+  const employeeData = data[0];
+  const projectData = data[1];
+
+  console.log(employeeData);
+  console.log(projectData);
+
+  if (isLoading) return <h1>loading...</h1>;
+  if (isError) return <h1>Sorry, there was a problem loading this page</h1>;
 
   if (employeeData) {
-    currentEmployeeData = employeeData.map((employee: IEmployee) => (
+    currentEmployeeData = (
       <Employee
-        key={employee.id}
-        id={employee.id}
-        name={employee.name}
-        role={employee.role}
-        avatar={employee.avatar}
+        key={employeeData.id}
+        id={employeeData.id}
+        name={employeeData.name}
+        role={employeeData.role}
+        avatar={employeeData.avatar}
       />
-    ));
+    );
   }
 
-
-  if (projectData) {
-    employeeProjectsData = findProjectsFromEmployee(id, projectData);
+  if (projectData && employeeId) {
+    employeeProjectsData = findProjectsFromEmployee(employeeId, projectData);
     employeeProjects = employeeProjectsData.map((project: IProject) => (
       <Project
         key={project.id}
@@ -46,11 +56,19 @@ export default function EmployeePage(): JSX.Element {
   }
 
   return (
-    <section className="responsive-wrapper">
-    <h1>Employee Bio</h1>
-    <div className="employee-data">{currentEmployeeData}</div>
-    <div className="project-grid">{employeeProjects}</div>
-  </section>
+    <>
+      <nav>
+      <button>
+          <Link to="/" className="link-button">
+            Dashboard Home
+          </Link>
+        </button>
+      </nav>
+      <section className="responsive-wrapper">
+        <h1>Employee Bio</h1>
+        <div className="employee-data">{currentEmployeeData}</div>
+        <div className="project-grid">{employeeProjects}</div>
+      </section>
+    </>
   );
 }
-
